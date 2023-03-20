@@ -5,4 +5,5 @@ bert_train_output = "./solidity_model"
 bert_whitening_train_output = "./bert_whitening/data/"
 max_len = 768
 batch_size = 10
+#test
 train_epochs = 20
