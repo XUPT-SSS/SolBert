@@ -92,14 +92,21 @@ def  __statement_xsbt(node):
 
     return xsbt
 def getParser(path):
-    input_stream = FileStream(path,encoding="utf-8")
-    lexer = soliditylexer(input_stream)
-    stream = CommonTokenStream(lexer)
-    parser = solidityparser(stream)
-    tree = parser.sourceUnit()
-    for i in range(0, tree.getChildCount()):
-        child = tree.getChild(i)
-        if isinstance(child, solidityparser.ContractDefinitionContext):
-            res = __statement_xsbt(child)
-            res = " ".join(res)
-            return res
+    try:
+
+         input_stream = FileStream(path,encoding="utf-8")
+         lexer = soliditylexer(input_stream)
+         stream = CommonTokenStream(lexer)
+         parser = solidityparser(stream)
+         tree = parser.sourceUnit()
+         result = []
+         for i in range(0, tree.getChildCount()):
+             child = tree.getChild(i)
+             if isinstance(child, solidityparser.ContractDefinitionContext):
+                 res = __statement_xsbt(child)
+                 res = " ".join(res)
+                 result.append(res)
+         return res
+    except Exception:
+        print("error_{}".format(path))
+
