@@ -11,7 +11,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 tokenizer = BertTokenizer.from_pretrained(bt.tokenzier_model)
 model = AutoModel.from_pretrained(bt.bert_train_output)
 model.to(device)
-
+#add
 
 def get_sentence_embedding(sentece, pooler_type):
     inputs = tokenizer(
