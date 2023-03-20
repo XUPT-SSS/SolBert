@@ -14,9 +14,9 @@ if __name__ == '__main__':
         limit_alphabet=100,
         special_tokens=["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"]
     )
-    tokenize.save_model()
+    tokenize.save_model(config.tokenzier_model)
     tokenize.post_processor = BertProcessing(
         ("[CLS]", tokenize.token_to_id("[CLS]")),
         ("[SEP]", tokenize.token_to_id("[SEP]")))
-    tokenize.enable_truncation(max_length=512)
+    tokenize.enable_truncation(max_length=768)
     tokenize.save(tokenzier_model_path + "/config.json")
