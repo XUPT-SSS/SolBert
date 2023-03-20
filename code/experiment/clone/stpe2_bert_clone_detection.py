@@ -46,8 +46,8 @@ def get_sentence_embedding(sentece, pooler_type):
 
 
 def get_clone_data(path):
-    if os.path.exists(os.path.join(path, "clone_data.pkl")):
-        with open(os.path.join(path, "clone_data.pkl"), 'rb') as f:
+    if os.path.exists(os.path.join(path, "data/clone_data.pkl")):
+        with open(os.path.join(path, "data/clone_data.pkl"), 'rb') as f:
             samples = pickle.load(f)
     return samples
 
