@@ -28,4 +28,4 @@ if __name__ == '__main__':
     print("lowerFive:{}".format(lowFive/total))
     print("loweSeven:{}".format(lowSeven/total))
     print("others:{}".format(others/total))
-
+    print("Statistics completed")
