@@ -1,9 +1,9 @@
 import os
 from antlr4 import *
 import re
-
+import utils
 from solidity_parser.solidity_antlr4.SolidityLexer import SolidityLexer
-
+import config as cf
 from solidity1_antlr4.SolidityParser import SolidityParser as solidityparser
 
 STATEMENT_ENDING_STRINGS=["ContractDefinitionContext","ContractPartContext","StructDefinitionContext","ModifierDefinitionContext","FunctionDefinitionContext","EventDefinitionContext","EnumDefinitionContext","MappingContext",
@@ -174,9 +174,9 @@ def get_all_file_path(root):
         result.append(os.path.join(root,file))
     return result
 if __name__ == '__main__':
-    path = r"C:\Users\ke_xianqun\Desktop//test"
+    path = cf.original_data_path
     files = get_all_file_path(path)
-    targetPath=r"C:\Users\ke_xianqun\Desktop//target//train.txt"
+    targetPath=cf.target_data_path
     f = open(targetPath,"w")
     print(len(files))
 
@@ -196,4 +196,6 @@ if __name__ == '__main__':
                 f.write(res + "\n")
         print(t)
     f.close()
+    utils.deduplicate(cf.target_data_path,cf.unique_data_path)
+
 
