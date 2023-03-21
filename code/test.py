@@ -1,11 +1,12 @@
 from tqdm import tqdm
+import config as cf
 if __name__ == '__main__':
     total = 0
     lowFour =0
     lowFive = 0
     lowSeven = 0
     others = 0
-    with open("","r") as file:
+    with open(cf.target_data_path,"r") as file:
         for line in file:
             total = total+1
             leng = len(line.strip().split(' '))
