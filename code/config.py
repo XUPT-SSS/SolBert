@@ -1,0 +1,11 @@
+original_data_path ="../dataset/train/"
+target_data_path="../dataset/train.txt"
+unique_data_path="../dataset/unique_train.txt"
+tokenzier_model="./solidity_tokenize"
+bert_train_output = "./solidity_model"
+bert_whitening_train_output = "./bertWhitening/data/"
+mirrot_bert="/code/mirror-bert/tmp/mirror_bert_mean"
+bert_mirror_whitening_train_output = "code/mirror_bert_whitening/data/"
+max_len = 512
+batch_size = 25
+train_epochs = 20
