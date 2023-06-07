@@ -1,9 +1,0 @@
-original_data_path ="../dataset/train/"
-target_data_path="../dataset/train.txt"
-unique_data_path="../dataset/unique_train.txt"
-tokenzier_model="./solidity_tokenize"
-bert_train_output = "./solidity_model"
-bert_whitening_train_output = "./bert_whitening/data/"
-max_len = 512
-batch_size = 25
-train_epochs = 20
