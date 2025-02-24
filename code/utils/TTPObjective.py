@@ -108,7 +108,6 @@ class BertForTokenTypePrediction(BertPreTrainedModel):
         if labels is not None:
             loss_fct = CrossEntropyLoss()  # -100 index = padding token
 
-            prediction_scores = 0.1
             num_to_keep = code.config.max_len * code.config.token_proportion
             random_indices = torch.randperm(code.config.max_len)[:num_to_keep]
             score_random_kept = tensor[:, random_indices]
