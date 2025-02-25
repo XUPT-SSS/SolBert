@@ -3,11 +3,13 @@ import os
 from transformers import BertTokenizer, BertForMaskedLM, BertConfig, LineByLineTextDataset
 from transformers import DataCollatorForLanguageModeling, DataCollatorForTokenClassification
 from transformers import Trainer, TrainingArguments
+from transformers import BertForTokenClassification
 
 from code.utils.TTPObjective import BertForTokenTypePrediction
 from utils.TTPObjective import BertTTPHead
 
 import config as config
+from utils import data_prepare
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
@@ -22,17 +24,14 @@ def get_bert_config():
         type_vocab_size=1)  # 指代 token_type_ids 的类别
     return config
 
-
 def get_bert_model_ttp():
     bert_config = get_bert_config()
     bert_tokenizer = BertTokenizer.from_pretrained(config.tokenzier_model)
-    bert_model = BertForTokenTypePrediction(config=bert_config)
-    dataset = LineByLineTextDataset(tokenizer=bert_tokenizer,  # 分词器
-                                    file_path=config.target_data_path,  # 文本数据
-                                    block_size=config.batch_size)# 每批读取128行
-    data_collector = DataCollatorForTokenClassification(tokenizer=bert_tokenizer,  # 分词器
-                                       mlm=True,  # mlm模型
-                                       mlm_probability=0.15)
+    bert_model = BertForTokenTypePrediction.from_pretrained(config=bert_config, num_labels=2)
+
+    dataset = data_prepare.TokenDataset(tokenizer=bert_tokenizer,
+                                    file_path=config.target_data_path)
+
     trainArgs = TrainingArguments(
         output_dir=config.bert_train_output,  # 输出路径
         overwrite_output_dir=True,  # 可以覆盖之前的输出
@@ -45,9 +44,7 @@ def get_bert_model_ttp():
     trainer = Trainer(
         model=bert_model,  # 模型对象
         args=trainArgs,  # 训练参数
-        data_collator=data_collector,  # collector
         train_dataset=dataset,# 数据集
-
     )
     return trainer
 
