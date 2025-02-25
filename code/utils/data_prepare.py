@@ -36,9 +36,7 @@ def prepare_data(texts, tokenizer, mask_prob=0.1):
         num_tokens = attention_mask[i].sum().item()
         num_to_mask = max(1, int(num_tokens * mask_prob))
         mask_indices = random.sample(range(num_tokens), num_to_mask)
-
         token_types = [1 if is_code_token(token) else 0 for token in tokenizer.convert_ids_to_tokens(input_ids[i])]
-
         for idx in mask_indices:
             labels[i, idx] = token_types[idx]
 
